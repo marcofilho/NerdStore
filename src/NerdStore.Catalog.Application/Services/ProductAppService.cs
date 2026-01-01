@@ -68,7 +68,7 @@ namespace NerdStore.Catalog.Application.Services
         {
             if (!await _stockService.ReplenishStock(id, quantity))
             {
-                throw new DomainException("Failed to debit stock");
+                throw new DomainException("Failed to replenish stock");
             }
 
             return _mapper.Map<ProductDto>(await _productRepository.GetByIdAsync(id));
@@ -76,7 +76,7 @@ namespace NerdStore.Catalog.Application.Services
 
         public void Dispose()
         {
-            _productRepository.Dispose();
+            _productRepository?.Dispose();
         }
     }
 }
